@@ -1,0 +1,40 @@
+cloud_provider:
+  name: aws
+nodes:
+# caminho da chave SSH
+ssh_key_path: ./ec2-ssh-key.pem
+# Nome do cluster K8s
+cluster_name: your-cluster-name
+services:
+  kube-api:
+    # Intervalo de IP para qualquer serviço criado no Kubernetes
+    # Isso deve corresponder ao service_cluster_ip_range no kube-controller
+    service_cluster_ip_range: 172.16.0.0/16
+    # Expor um intervalo de portas diferente para serviços NodePort
+    service_node_port_range: 30000-32767
+    pod_security_policy: false
+  kube-controller:
+    # pool CIDR usado para atribuir endereços IP a pods no cluster
+    cluster_cidr: 172.15.0.0/16
+    # Intervalo de IP para qualquer serviço criado no Kubernetes
+    # Isso deve corresponder ao service_cluster_ip_range no kube-api
+    service_cluster_ip_range: 172.16.0.0/16
+  kubelet:
+    # Domínio base para o cluster
+    cluster_domain: cluster.local
+    # endereço IP para o endpoint do serviço DNS
+    cluster_dns_server: 172.16.0.10
+    # Falha se o swap estiver ativada
+    fail_swap_on: false
+network:
+  plugin: calico
+# Especifique o provedor DNS (coredns ou kube-dns)
+dns:
+  provider: coredns
+# Modo de autorização do Kubernetes
+# Ativar RBAC
+authorization:
+  mode: rbac
+# Especifique o provedor de monitoramento (metrics-server)
+monitoring:
+  provider: metrics-server
