@@ -165,7 +165,7 @@ Para destruir a infraestrutura, execute o comando `terrargunt destroy` no mesmo 
 ```
 mkdir -p $HOME/.kube
 
-KUBE_CONFIG=$(sudo aws secretsmanager get-secret-value --secret-id rkekubeconfig --version-stage AWSCURRENT --region eu-west-1 | jq -r .SecretString)
+KUBE_CONFIG=$(sudo aws secretsmanager get-secret-value --secret-id rkekubeconfig --version-stage AWSCURRENT --region us-east-1 | jq -r .SecretString)
 
 sudo tee $HOME/.kube/config<<EOF
 $KUBE_CONFIG
