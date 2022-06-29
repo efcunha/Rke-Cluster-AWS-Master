@@ -26,7 +26,7 @@ O diagrama abaixo descreve a arquitetura geral para a rede VPC e os grupos de Au
 |  └── app-environment
 ├── rke-cluster-config
 |  └── cluster.yml
-├── sensitive.tfvars (not committed to Git repo)
+├── sensitive.tfvars (não committed pelo Git repo)
 └── terragrunt.hcl
 ```
 
